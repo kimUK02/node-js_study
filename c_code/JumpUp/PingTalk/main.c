@@ -105,7 +105,7 @@ int make_icmp_packet(u_char **packet, ipaddr_t my_ip, const u_char *my_mac, ipad
     iph.version = 4;
     iph.ihl = 5;
     iph.tos = 0;
-    iph.tot_len = htons((uint16_t)60);
+    iph.tot_len = htons((uint16_t)64);
     iph.id = getpid();// = 0;
     iph.frag_off = htons(0x4000);
     iph.ttl = 64;
@@ -128,7 +128,7 @@ int make_icmp_packet(u_char **packet, ipaddr_t my_ip, const u_char *my_mac, ipad
     printf("\nchecksum: %x",(icmp_checksum ((u_int16_t*)&icmph, length)));
     memcpy((*packet)+length, &icmph, sizeof(icmph)+sizeof(iph));
     length += sizeof(icmph)+sizeof(iph);
-    memcpy((*packet)+length, "hello,world", sizeof(char)*12);
+    memcpy((*packet)+length, "hello,world!", sizeof(char)*12);
     length += sizeof(char)*12;
     return length;
 }
