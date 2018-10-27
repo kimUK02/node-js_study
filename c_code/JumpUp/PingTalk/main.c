@@ -86,7 +86,7 @@ __u_short ipchekcsum(ip_header_t * iph){
 int make_icmp_packet(u_char **packet, ipaddr_t my_ip, const u_char *my_mac, ipaddr_t target_ip, const u_char *target_mac) {
     
     int length = 0;     
-
+    char massage[64];
     ether_header_t eth;
     ip_header_t iph;
     icmp_header_t icmph;
@@ -105,7 +105,7 @@ int make_icmp_packet(u_char **packet, ipaddr_t my_ip, const u_char *my_mac, ipad
     iph.version = 4;
     iph.ihl = 5;
     iph.tos = 0;
-    iph.tot_len = htons((uint16_t)64);
+    iph.tot_len = htons((uint16_t)48+sizeof(massage));
     iph.id = getpid();// = 0;
     iph.frag_off = htons(0x4000);
     iph.ttl = 64;
@@ -119,7 +119,7 @@ int make_icmp_packet(u_char **packet, ipaddr_t my_ip, const u_char *my_mac, ipad
     memcpy((*packet)+length, &iph, sizeof(iph));
     length += sizeof(iph);
     
-   // icmph.checksum = 0;
+   // icmph.checksum = 0;a
     icmph.type = ICMP_ECHO;
     icmph.code = 0;
     icmph.un.echo.id = getpid();
@@ -128,8 +128,10 @@ int make_icmp_packet(u_char **packet, ipaddr_t my_ip, const u_char *my_mac, ipad
     printf("\nchecksum: %x",(icmp_checksum ((u_int16_t*)&icmph, length)));
     memcpy((*packet)+length, &icmph, sizeof(icmph)+sizeof(iph));
     length += sizeof(icmph)+sizeof(iph);
-    memcpy((*packet)+length, "hello,world!", sizeof(char)*12);
-    length += sizeof(char)*12;
+    printf("\nMassage => ");
+    scanf("%s",massage);
+    memcpy((*packet)+length, massage, sizeof(massage));
+    length += sizeof(massage);
     return length;
 }
 
