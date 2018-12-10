@@ -32,8 +32,8 @@ int main(int argc, char const *argv[])
     if(connect(sock,(struct sockaddr*)&serv_addr, sizeof(serv_addr))==-1){
         error_handling("connect() error!");
     }
-    for(int i = 0;i<100000;i++)
-        printf("wait time %d \n",i);
+    // for(int i = 0;i<100000;i++)
+    //     printf("wait time %d \n",i);
     str_len = read(sock, massage, sizeof(massage)-1);
     if(str_len==-1){
         error_handling("read() error");
