@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "*.py": "python",
+        "ioctl.h": "c",
+        "if.h": "c",
+        "if_arp.h": "c",
+        "new": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "initializer_list": "cpp",
+        "string_view": "cpp",
+        "cctype": "cpp"
+    }
+}
